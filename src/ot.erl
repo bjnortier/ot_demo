@@ -33,7 +33,6 @@ apply_op({del, Chars}) ->
 
 
 transform(ClientOps, ServerOps) ->
-    %%transform(ClientOps, ServerOps, [], [], 0, 0).
     {CDashWithNoOp, SDashWithNoOp} = transform(ClientOps, ServerOps, [], [], 0, 0),
     %% Used foldr here instead of foldl as we're using the faster
     %% list cons function instead of the ++ operator
@@ -41,8 +40,6 @@ transform(ClientOps, ServerOps) ->
      filter_empty(compress(SDashWithNoOp))}.
 
 transform(ClientOps, ServerOps, CAcc, SAcc, ClientPos, ServerPos) ->
-%%     io:format("C: ~~p S: ~~p~~nC': ~~p S': ~~p Cp: ~~p Sp: ~~p~~n", 
-%% 	      [ClientOps, ServerOps, CAcc, SAcc, ClientPos, ServerPos]),
     transform_(ClientOps, ServerOps, CAcc, SAcc, ClientPos, ServerPos).
 
 
