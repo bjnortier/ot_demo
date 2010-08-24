@@ -20,7 +20,7 @@ split_op({del, Chars}, SecondSegmentSize) ->
 split_op({ret, N}, SecondSegmentSize) ->
     {{ret, N - SecondSegmentSize}, {ret, SecondSegmentSize}};
 split_op(Component, _) ->
-    throw(io_lib:format("split_op called on unsplittable component, ~p", [Component])).
+    throw(io_lib:format("split_op called on unsplittable component, ~~p", [Component])).
 
 apply_op({ins, Chars}) ->
     {{ins, Chars}, {ret, length(Chars)}};
@@ -41,7 +41,7 @@ transform(ClientOps, ServerOps) ->
      filter_empty(compress(SDashWithNoOp))}.
 
 transform(ClientOps, ServerOps, CAcc, SAcc, ClientPos, ServerPos) ->
-%%     io:format("C: ~p S: ~p~nC': ~p S': ~p Cp: ~p Sp: ~p~n", 
+%%     io:format("C: ~~p S: ~~p~~nC': ~~p S': ~~p Cp: ~~p Sp: ~~p~~n", 
 %% 	      [ClientOps, ServerOps, CAcc, SAcc, ClientPos, ServerPos]),
     transform_(ClientOps, ServerOps, CAcc, SAcc, ClientPos, ServerPos).
 
@@ -259,10 +259,10 @@ transform_11_test() ->
 
 
 transform_12_test() ->
-    ClientComponents = [{ins, "£"}, {ret, 4}, {del, " pounds"}],
+    ClientComponents = [{ins, "Â£"}, {ret, 4}, {del, " pounds"}],
     ServerComponents = [{ret, 1}, {del, "000"}, {ret, 7}],
     [
-     ?assertMatch({[{ins,"£"},{ret,1},{del," pounds"}],
+     ?assertMatch({[{ins,"Â£"},{ret,1},{del," pounds"}],
 		    [{ret,2},{del,"000"}]},
 		   transform(ClientComponents, ServerComponents))
     ].
