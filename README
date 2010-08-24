@@ -1,0 +1,8 @@
+Operation transform functions in Erlang compatible with the Google Wave (RIP) referecne implementation.
+Supports basic text editing operations: insert, delete.
+
+To compile:
+$./rebar compile
+
+To run all tests:
+$./rebar eunit
